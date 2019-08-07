@@ -5,10 +5,19 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.syffer.pincreminder.data.db.PrincipleDatabase
+import com.syffer.pincreminder.data.repository.PrincipleDefaultRepository
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {
+
+    val logger = Logger.getLogger("MainActivity")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +30,19 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
         */
+
+        val database = PrincipleDatabase.database.getInstance(application)
+        val repository = PrincipleDefaultRepository(database.principleDao())
+
+        val scope = CoroutineScope(Dispatchers.Main)
+        scope.launch {
+            withContext(Dispatchers.IO) {
+                val principles = repository.getPrinciples()
+
+                logger.info("${principles}")
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,0 +1,15 @@
+package com.syffer.pincreminder.data.repository
+
+import com.syffer.pincreminder.data.Result
+import com.syffer.pincreminder.data.entities.Principle
+
+interface PrincipleDataSource {
+
+    suspend fun getPrinciples(): Result<List<Principle>>
+
+    suspend fun getPrinciple(id: Int): Result<Principle>
+
+    suspend fun save(principle: Principle)
+
+    suspend fun delete(principle: Principle)
+}
