@@ -32,9 +32,10 @@ abstract class PrincipleDatabase : RoomDatabase() {
                         super.onCreate(db)
 
                         scope.launch {
-                            val principleDAO = get(context).principleDao()
-                            principleDAO.clear()
-                            principleDAO.save(DATAFIXTURES)
+                            val principleDAO = get(context).principleDao().apply {
+                                clear()
+                                save(DATAFIXTURES)
+                            }
                         }
                     }
 
@@ -42,8 +43,7 @@ abstract class PrincipleDatabase : RoomDatabase() {
                         super.onOpen(db)
 
                         scope.launch {
-                            val principleDAO = get(context).principleDao()
-                            principleDAO.apply {
+                            val principleDAO = get(context).principleDao().apply {
                                 clear()
                                 save(DATAFIXTURES)
                             }
