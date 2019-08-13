@@ -4,5 +4,12 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main"
             app:startDestination="@id/principlesFragment">
     <fragment android:id="@+id/principlesFragment" android:name="com.syffer.pincreminder.presentation.principles.PrinciplesFragment"
-              android:label="fragment_principles" tools:layout="@layout/fragment_principles"/>
+              android:label="fragment_principles" tools:layout="@layout/fragment_principles">
+        <action android:id="@+id/action_edit"
+                app:destination="@id/editPrincipleFragment"/>
+    </fragment>
+    <fragment android:id="@+id/editPrincipleFragment" android:name="com.syffer.pincreminder.presentation.edit.EditPrincipleFragment"
+              android:label="fragment_edit_principle" tools:layout="@layout/fragment_edit_principle">
+        <argument android:name="principleId" app:argType="integer"/>
+    </fragment>
 </navigation>

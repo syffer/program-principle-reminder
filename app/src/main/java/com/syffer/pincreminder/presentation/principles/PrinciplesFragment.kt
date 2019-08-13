@@ -5,15 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syffer.pincreminder.MainActivity
-import com.syffer.pincreminder.data.Result
 import com.syffer.pincreminder.data.entities.Principle
 import com.syffer.pincreminder.databinding.FragmentPrinciplesBinding
 import com.syffer.pincreminder.presentation.getViewModel
 import kotlinx.android.synthetic.main.fragment_principles.*
-import kotlinx.coroutines.*
 
 class PrinciplesFragment : Fragment() {
 
@@ -51,7 +50,11 @@ class PrinciplesFragment : Fragment() {
 
     private fun setupListAdapter() {
         val items = viewmodel.principles.value.orEmpty()
-        val adapter = PrincipleAdapter(items)
+        val adapter = PrinciplesAdapter(items, object : PrinciplesAdapter.OnClickListener {
+            override fun onPrincipleClick(principle: Principle) {
+                openPrincipleDetails(principle)
+            }
+        })
 
         viewmodel.principles.observeForever { principles ->
             adapter.principles = principles
@@ -62,6 +65,11 @@ class PrinciplesFragment : Fragment() {
         recyclerView.hasFixedSize()
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
+    }
+
+    private fun openPrincipleDetails(principle: Principle) {
+        val action = PrinciplesFragmentDirections.actionEdit(principle.id!!)
+        findNavController().navigate(action)
     }
 
     override fun onDetach() {

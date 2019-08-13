@@ -27,4 +27,7 @@ class PrinciplesViewModel(
 
     }
 
+    fun onPrincipleClick() {
+
+    }
 }

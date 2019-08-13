@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="principle" type="com.syffer.pincreminder.data.entities.Principle"/>
+        <variable name="principle"
+                  type="com.syffer.pincreminder.data.entities.Principle"/>
+        <variable name="listener"
+                  type="com.syffer.pincreminder.presentation.principles.PrinciplesAdapter.OnClickListener"/>
     </data>
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:onClick="@{() -> listener.onPrincipleClick(principle)}">
 
         <TextView
                 android:text="@{principle.title}"

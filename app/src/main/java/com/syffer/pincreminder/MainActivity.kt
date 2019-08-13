@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //setupNavigation()
-
+        /*
         val scope = CoroutineScope(Dispatchers.Main)
         scope.launch {
             withContext(Dispatchers.IO) {
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 logger.info("${principles}")
             }
         }
-
+        */
     }
 
     private fun setupNavigation() {
