@@ -28,6 +28,12 @@ android {
     dataBinding {
         enabled = true
     }
+    // to be able to use navArgs()
+    // avoid "Cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6"
+    // @see https://stackoverflow.com/questions/48988778/cannot-inline-bytecode-built-with-jvm-target-1-8-into-bytecode-that-is-being-bui
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -57,7 +63,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version" // tests helpers for LiveData
 
-    //
+    // data binding
     kapt "com.android.databinding:compiler:$gradle_version"
 
     // navigation
