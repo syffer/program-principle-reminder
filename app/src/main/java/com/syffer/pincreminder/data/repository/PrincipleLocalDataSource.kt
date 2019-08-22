@@ -23,15 +23,15 @@ class PrincipleLocalDataSource(
 
             return when (principle) {
                 is Principle -> Result.Success(principle)
-                else -> Result.Error(IOException("no found"))
+                else -> Result.Error(IOException("no found, ${principle}"))
             }
         } catch(e: Exception) {
             return Result.Error(e)
         }
     }
 
-    override suspend fun save(principle: Principle) {
-        return principleDao.save(principle)
+    override suspend fun save(principle: Principle): Int {
+        return principleDao.save(principle).toInt()
     }
 
     override suspend fun delete(principle: Principle) {

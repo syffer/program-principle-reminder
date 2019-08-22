@@ -9,7 +9,7 @@ interface PrincipleRepository {
 
     suspend fun getPrinciple(id: Int): Result<Principle>
 
-    suspend fun save(principle: Principle)
+    suspend fun save(principle: Principle): Int
 
     suspend fun delete(principle: Principle)
 

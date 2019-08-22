@@ -3,8 +3,10 @@ package com.syffer.pincreminder
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.syffer.pincreminder.data.Result
 import com.syffer.pincreminder.data.db.PrincipleDatabase
 import com.syffer.pincreminder.data.repository.PrincipleDefaultRepository
+import com.syffer.pincreminder.data.repository.PrincipleLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,23 +19,27 @@ class MainActivity : AppCompatActivity() {
 
     val repository by lazy {
         val database = PrincipleDatabase.database.getInstance(application)
-        PrincipleDefaultRepository(database.principleDao())
+        val localDataSource = PrincipleLocalDataSource(database.principleDao())
+        PrincipleDefaultRepository(localDataSource)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*
         val scope = CoroutineScope(Dispatchers.Main)
         scope.launch {
             withContext(Dispatchers.IO) {
-                val principles = repository.getPrinciples()
+                val result = repository.getPrinciples()
 
-                logger.info("${principles}")
+                logger.info("${result}")
+                if (result is Result.Success && result.data.isNotEmpty()) {
+                    val id = result.data[0].id!!
+                    val res = repository.getPrinciple(id)
+                    logger.info("and ${id} ${res}")
+                }
             }
         }
-        */
     }
 
     private fun setupNavigation() {

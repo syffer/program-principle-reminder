@@ -9,9 +9,9 @@ data class Principle(
     @NotNull
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val title: String,
-    val description: String = "",
-    val source: String = ""
+    var title: String,
+    var description: String = "",
+    var source: String = ""
 )
 
 val DATAFIXTURES = listOf(
