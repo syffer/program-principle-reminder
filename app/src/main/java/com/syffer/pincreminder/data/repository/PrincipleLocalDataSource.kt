@@ -30,8 +30,13 @@ class PrincipleLocalDataSource(
         }
     }
 
-    override suspend fun save(principle: Principle): Int {
-        return principleDao.save(principle).toInt()
+    override suspend fun save(principle: Principle): Result<Int> {
+        try {
+            val id = principleDao.save(principle).toInt()
+            return Result.Success(id)
+        } catch (e: Exception) {
+            return Result.Error(e)
+        }
     }
 
     override suspend fun delete(principle: Principle) {

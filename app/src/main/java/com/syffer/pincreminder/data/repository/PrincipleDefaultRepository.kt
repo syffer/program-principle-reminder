@@ -17,8 +17,8 @@ class PrincipleDefaultRepository(
         return principle
     }
 
-    override suspend fun save(principle: Principle): Int {
-        return local.save(principle).toInt()
+    override suspend fun save(principle: Principle): Result<Int> {
+        return local.save(principle)
     }
 
     override suspend fun delete(principle: Principle) {

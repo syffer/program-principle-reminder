@@ -9,7 +9,7 @@ interface PrincipleDataSource {
 
     suspend fun getPrinciple(id: Int): Result<Principle>
 
-    suspend fun save(principle: Principle): Int
+    suspend fun save(principle: Principle): Result<Int>
 
     suspend fun delete(principle: Principle)
 }
