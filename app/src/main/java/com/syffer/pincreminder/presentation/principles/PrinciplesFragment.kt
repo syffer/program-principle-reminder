@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.syffer.pincreminder.MainActivity
 import com.syffer.pincreminder.data.entities.Principle
 import com.syffer.pincreminder.databinding.FragmentPrinciplesBinding
+import com.syffer.pincreminder.presentation.EventObserver
 import com.syffer.pincreminder.presentation.getViewModel
 import kotlinx.android.synthetic.main.fragment_principles.*
 
@@ -47,6 +48,7 @@ class PrinciplesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setupListAdapter()
+        setupNavigation()
     }
 
     private fun setupListAdapter() {
@@ -71,6 +73,15 @@ class PrinciplesFragment : Fragment() {
     private fun openPrincipleDetails(principle: Principle) {
         val action = PrinciplesFragmentDirections.actionEdit(principle.id!!)
         findNavController().navigate(action)
+    }
+
+    private fun setupNavigation() {
+        viewmodel.eventAddPrinciple.observe(this, EventObserver {
+            val action = PrinciplesFragmentDirections.actionAdd()
+            findNavController().navigate(action)
+        })
+
+        // @TODO handle eventEditPrinciple properly
     }
 
     override fun onDetach() {

@@ -40,11 +40,10 @@
                 android:clickable="true"
                 android:id="@+id/floatingActionButton"
                 android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="16dp" android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_anchorGravity="end|bottom"
                 app:layout_anchor="@+id/constraintLayout" android:src="@drawable/ic_done_24px"
                 app:backgroundTint="#4CAF50"
-                android:onClick="@{() -> viewmodel.saveModifications()}"/>
+                android:onClick="@{() -> viewmodel.saveModifications()}" android:layout_margin="@dimen/fab_margin"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
