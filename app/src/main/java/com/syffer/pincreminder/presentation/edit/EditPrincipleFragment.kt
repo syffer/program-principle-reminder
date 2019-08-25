@@ -45,6 +45,7 @@ class EditPrincipleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupNavigation()
+        vm.updateData()
     }
 
     private fun setupNavigation() {

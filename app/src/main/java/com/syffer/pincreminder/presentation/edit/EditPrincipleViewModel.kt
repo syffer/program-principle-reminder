@@ -26,6 +26,10 @@ class EditPrincipleViewModel(
     val description = MutableLiveData<String>()
 
     init {
+        updateData()
+    }
+
+    fun updateData() {
         viewModelScope.launch {
             principle = getPrinciple(principleId)
             title.value = principle.title

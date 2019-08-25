@@ -20,6 +20,6 @@
               android:label="fragment_principle_detail" tools:layout="@layout/fragment_principle_detail">
         <argument android:name="principleId" app:argType="integer"/>
         <action android:id="@+id/action_edit"
-                app:destination="@id/editPrincipleFragment"/>
+                app:destination="@id/editPrincipleFragment" app:popUpTo="@+id/principlesFragment"/>
     </fragment>
 </navigation>
