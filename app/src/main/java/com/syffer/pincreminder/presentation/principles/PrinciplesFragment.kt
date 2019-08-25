@@ -38,6 +38,7 @@ class PrinciplesFragment : Fragment() {
         // @see https://stackoverflow.com/questions/39483094/data-binding-class-not-generated
         val binding = FragmentPrinciplesBinding.inflate(inflater, container, false)
         binding.viewmodel = viewmodel
+        binding.lifecycleOwner = this
 
         return binding.root
     }

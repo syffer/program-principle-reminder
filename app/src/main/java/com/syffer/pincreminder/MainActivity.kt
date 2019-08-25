@@ -27,16 +27,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val scope = CoroutineScope(Dispatchers.Main)
+        val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             withContext(Dispatchers.IO) {
                 val result = repository.getPrinciples()
 
-                logger.info("${result}")
-                if (result is Result.Success && result.data.isNotEmpty()) {
-                    val id = result.data[0].id!!
-                    val res = repository.getPrinciple(id)
-                    logger.info("and ${id} ${res}")
+                logger.info("principles ${result}")
+
+                if (result is Result.Success) {
+                    result.data.forEach {it ->
+                        val id = it.id
+                        val result = repository.getPrinciple(id!!)
+                        logger.info("principle ${id!!} is ${result}")
+                    }
                 }
             }
         }

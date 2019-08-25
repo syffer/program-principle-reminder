@@ -12,9 +12,7 @@ class PrinciplesViewModel(
     private val principleRepository : PrincipleRepository
 ) : ViewModel() {
 
-    val principles: MutableLiveData<List<Principle>> = MutableLiveData<List<Principle>>().apply {
-        emptyList<Principle>()
-    }
+    val principles = MutableLiveData<List<Principle>>()
 
     init {
 
@@ -27,7 +25,4 @@ class PrinciplesViewModel(
 
     }
 
-    fun onPrincipleClick() {
-
-    }
 }
