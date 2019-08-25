@@ -1,16 +1,15 @@
 package com.syffer.pincreminder.presentation.edit
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.syffer.pincreminder.MainActivity
-import com.syffer.pincreminder.R
 import com.syffer.pincreminder.databinding.FragmentEditPrincipleBinding
+import com.syffer.pincreminder.presentation.EventObserver
 import com.syffer.pincreminder.presentation.getViewModel
 
 
@@ -38,8 +37,23 @@ class EditPrincipleFragment : Fragment() {
             viewmodel = vm
         }
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupNavigation()
+    }
+
+    private fun setupNavigation() {
+        vm.eventSavePrinciple.observe(this, EventObserver {
+            // @TODO close keyboard when navigating
+            // @see https://stackoverflow.com/questions/26911469/hide-keyboard-when-navigating-from-a-fragment-to-another
+
+            val action = EditPrincipleFragmentDirections.actionSave()
+            findNavController().navigate(action)
+        })
     }
 }

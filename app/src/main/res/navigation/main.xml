@@ -11,5 +11,7 @@
     <fragment android:id="@+id/editPrincipleFragment" android:name="com.syffer.pincreminder.presentation.edit.EditPrincipleFragment"
               android:label="fragment_edit_principle" tools:layout="@layout/fragment_edit_principle">
         <argument android:name="principleId" app:argType="integer"/>
+        <action android:id="@+id/action_save"
+                app:destination="@id/principlesFragment"/>
     </fragment>
 </navigation>
