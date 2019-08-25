@@ -49,6 +49,7 @@ class PrinciplesFragment : Fragment() {
 
         setupListAdapter()
         setupNavigation()
+        viewmodel.updateData()
     }
 
     private fun setupListAdapter() {

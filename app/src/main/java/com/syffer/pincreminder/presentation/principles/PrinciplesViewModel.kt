@@ -21,6 +21,10 @@ class PrinciplesViewModel(
     val principles = MutableLiveData<List<Principle>>()
 
     init {
+        updateData()
+    }
+
+    fun updateData() {
         viewModelScope.launch {
             val result = principleRepository.getPrinciples()
             if (result is Result.Success) {
