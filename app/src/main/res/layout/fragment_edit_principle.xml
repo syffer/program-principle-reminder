@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:id="@+id/floatingActionButton"
-                android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_anchorGravity="end|bottom"
                 app:layout_anchor="@+id/constraintLayout" android:src="@drawable/ic_done_24px"
                 app:backgroundTint="#4CAF50"

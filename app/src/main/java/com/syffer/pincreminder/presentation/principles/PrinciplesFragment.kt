@@ -71,7 +71,7 @@ class PrinciplesFragment : Fragment() {
     }
 
     private fun openPrincipleDetails(principle: Principle) {
-        val action = PrinciplesFragmentDirections.actionEdit(principle.id!!)
+        val action = PrinciplesFragmentDirections.actionDetail(principle.id!!)
         findNavController().navigate(action)
     }
 

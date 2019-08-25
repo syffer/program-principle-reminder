@@ -5,18 +5,21 @@
             app:startDestination="@id/principlesFragment">
     <fragment android:id="@+id/principlesFragment" android:name="com.syffer.pincreminder.presentation.principles.PrinciplesFragment"
               android:label="fragment_principles" tools:layout="@layout/fragment_principles">
-        <action android:id="@+id/action_edit"
-                app:destination="@id/editPrincipleFragment"/>
         <action android:id="@+id/action_add"
                 app:destination="@id/editPrincipleFragment">
             <argument android:defaultValue="-1" android:name="principleId"/>
         </action>
+        <action android:id="@+id/action_detail"
+                app:destination="@id/principleDetailFragment"/>
     </fragment>
     <fragment android:id="@+id/editPrincipleFragment" android:name="com.syffer.pincreminder.presentation.edit.EditPrincipleFragment"
               android:label="fragment_edit_principle" tools:layout="@layout/fragment_edit_principle">
         <argument android:name="principleId" app:argType="integer"/>
-        <action android:id="@+id/action_save"
-                app:destination="@id/principlesFragment" app:popUpToInclusive="false"
-        />
+    </fragment>
+    <fragment android:id="@+id/principleDetailFragment" android:name="com.syffer.pincreminder.presentation.detail.PrincipleDetailFragment"
+              android:label="fragment_principle_detail" tools:layout="@layout/fragment_principle_detail">
+        <argument android:name="principleId" app:argType="integer"/>
+        <action android:id="@+id/action_edit"
+                app:destination="@id/editPrincipleFragment"/>
     </fragment>
 </navigation>

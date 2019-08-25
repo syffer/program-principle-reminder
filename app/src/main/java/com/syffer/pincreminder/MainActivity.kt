@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             withContext(Dispatchers.IO) {
@@ -38,11 +39,11 @@ class MainActivity : AppCompatActivity() {
                     result.data.forEach {it ->
                         val id = it.id
                         val result = repository.getPrinciple(id!!)
-                        logger.info("principle ${id!!} is ${result}")
                     }
                 }
             }
         }
+        */
     }
 
     private fun setupNavigation() {

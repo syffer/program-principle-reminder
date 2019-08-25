@@ -1,4 +1,4 @@
-package com.syffer.pincreminder.presentation.edit
+package com.syffer.pincreminder.presentation.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,19 +8,24 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.syffer.pincreminder.MainActivity
-import com.syffer.pincreminder.databinding.FragmentEditPrincipleBinding
+import com.syffer.pincreminder.databinding.FragmentPrincipleDetailBinding
 import com.syffer.pincreminder.presentation.EventObserver
 import com.syffer.pincreminder.presentation.getViewModel
+import java.util.logging.Logger
 
+class PrincipleDetailFragment : Fragment() {
 
-class EditPrincipleFragment : Fragment() {
+    private val logger  = Logger.getLogger(this::class.java.name)
 
-    private val args : EditPrincipleFragmentArgs by navArgs()
+    private val args: PrincipleDetailFragmentArgs by navArgs()
 
     private val vm by lazy {
+
+        logger.info("$args")
+
         getViewModel {
             val activity = (this.activity as MainActivity)
-            EditPrincipleViewModel(activity.repository, args.principleId)
+            PrincipleDetailViewModel(activity.repository, args.principleId)
         }
     }
 
@@ -28,15 +33,10 @@ class EditPrincipleFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val binding = FragmentEditPrincipleBinding.inflate(inflater, container, false).apply {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentPrincipleDetailBinding.inflate(inflater, container, false).apply {
             viewmodel = vm
         }
-
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
@@ -48,11 +48,9 @@ class EditPrincipleFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-        vm.eventSavePrinciple.observe(this, EventObserver {
-            // @TODO close keyboard when navigating
-            // @see https://stackoverflow.com/questions/26911469/hide-keyboard-when-navigating-from-a-fragment-to-another
-
-            findNavController().navigateUp()
+        vm.eventEditPrinciple.observe(this, EventObserver {
+            val action = PrincipleDetailFragmentDirections.actionEdit(args.principleId)
+            findNavController().navigate(action)
         })
     }
 }
